@@ -8,18 +8,18 @@ using MyCompany.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//подключаем конфиг из appsetting.json
+//ГЇГ®Г¤ГЄГ«ГѕГ·Г ГҐГ¬ ГЄГ®Г­ГґГЁГЈ ГЁГ§ appsetting.json
 builder.Configuration.Bind("Project", new Config());
 
-//подключаем нужный функционал приложения в качестве сервисов
+//ГЇГ®Г¤ГЄГ«ГѕГ·Г ГҐГ¬ Г­ГіГ¦Г­Г»Г© ГґГіГ­ГЄГ¶ГЁГ®Г­Г Г« ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГї Гў ГЄГ Г·ГҐГ±ГІГўГҐ Г±ГҐГ°ГўГЁГ±Г®Гў
 builder.Services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
 builder.Services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
 builder.Services.AddTransient<DataManager>();
 
-//подключаем контекст БД
+//ГЇГ®Г¤ГЄГ«ГѕГ·Г ГҐГ¬ ГЄГ®Г­ГІГҐГЄГ±ГІ ГЃГ„
 builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
-//настраиваем identity систему
+//Г­Г Г±ГІГ°Г ГЁГўГ ГҐГ¬ identity Г±ГЁГ±ГІГҐГ¬Гі
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
 {
     opts.User.RequireUniqueEmail = true;
@@ -30,7 +30,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
     opts.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-//настраиваем authentication cookie
+//Г­Г Г±ГІГ°Г ГЁГўГ ГҐГ¬ authentication cookie
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.Name = "myCompanyAuth";
@@ -40,14 +40,18 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-//настраиваем политику авторизации для Admin area
+//Г­Г Г±ГІГ°Г ГЁГўГ ГҐГ¬ ГЇГ®Г«ГЁГІГЁГЄГі Г ГўГІГ®Г°ГЁГ§Г Г¶ГЁГЁ Г¤Г«Гї Admin area
 builder.Services.AddAuthorization(x =>
 {
     x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
 });
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+//builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(x =>
+{
+    x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
+});
 
 var app = builder.Build();
 
@@ -69,7 +73,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//подключаем аутентификацию и авторизацию
+//ГЇГ®Г¤ГЄГ«ГѕГ·Г ГҐГ¬ Г ГіГІГҐГ­ГІГЁГґГЁГЄГ Г¶ГЁГѕ ГЁ Г ГўГІГ®Г°ГЁГ§Г Г¶ГЁГѕ
 app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseAuthorization();
