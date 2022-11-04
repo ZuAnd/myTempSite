@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6M6mUHb7HL3wwSuvmSCFYRfd6GpNnZW4QzaIFk4a0/s=",
+  "Hash": "Mn0KvYOWxjYCI3EgcZa3yiTgIUYcGbWbjuUl6wiGKXw=",
   "Source": "MyCompany",
   "BasePath": "_content/MyCompany",
   "Mode": "Default",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\bg1.png"
+    },
+    {
+      "Identity": "C:\\Users\\zuev\\source\\repos\\MyCompany\\MyCompany\\wwwroot\\images\\Forest.jpg",
+      "SourceId": "MyCompany",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zuev\\source\\repos\\MyCompany\\MyCompany\\wwwroot\\",
+      "BasePath": "_content/MyCompany",
+      "RelativePath": "images/Forest.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Forest.jpg"
     },
     {
       "Identity": "C:\\Users\\zuev\\source\\repos\\MyCompany\\MyCompany\\wwwroot\\images\\icon-bubble.png",

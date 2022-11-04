@@ -1,8 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model TextField
+@{
+    ViewBag.Title = Model.MetaTitle;
+    ViewBag.Description = Model.MetaDescription;
+    ViewBag.Keywords = Model.MetaKeywords;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome Привет Это главная столица </h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+    @Html.Raw(Model.Text)
 </div>
