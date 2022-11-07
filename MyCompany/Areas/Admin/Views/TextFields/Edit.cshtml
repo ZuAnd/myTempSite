@@ -6,6 +6,7 @@
 
 <script src="~/js/ckeditor/ckeditor.js"></script>
 
+
 <div>
     <h2>@strTitle</h2>
     <div>
@@ -22,7 +23,7 @@
             </div>
             <div class="div-box">
                 <label asp-for="Text"></label>
-                <textarea asp-for="Text"></textarea>
+                <textarea asp-for="Text" id = "Text"></textarea>
                 <span asp-validation-for="Text"></span>
             </div>
             <div class="div-box">
@@ -46,10 +47,23 @@
 </div>
 
 
-
+@*
 <script>
     window.onload = function() {
-        var newCKEdit = CKEDITOR.replace('@Html.IdFor(x=>x.Text)');
+      var newCKEdit = CKEDITOR.replace('@Html.IdFor(x=>x.Text)');
         newCKEdit.updateElement();
     }
+</script>*@
+
+            <script>
+	ClassicEditor
+		.create( document.querySelector( '#@Html.IdFor(x=>x.Text)' ), {
+			 //toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+		} )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
 </script>

@@ -8,18 +8,18 @@ using MyCompany.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//ïîäêëþ÷àåì êîíôèã èç appsetting.json
+//appsetting.json
 builder.Configuration.Bind("Project", new Config());
 
-//ïîäêëþ÷àåì íóæíûé ôóíêöèîíàë ïðèëîæåíèÿ â êà÷åñòâå ñåðâèñîâ
+
 builder.Services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
 builder.Services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
 builder.Services.AddTransient<DataManager>();
 
-//ïîäêëþ÷àåì êîíòåêñò ÁÄ
+
 builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
 
-//íàñòðàèâàåì identity ñèñòåìó
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
 {
     opts.User.RequireUniqueEmail = true;
@@ -30,7 +30,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
     opts.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
-//íàñòðàèâàåì authentication cookie
+// authentication cookie
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.Name = "myCompanyAuth";
@@ -40,17 +40,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-//íàñòðàèâàåì ïîëèòèêó àâòîðèçàöèè äëÿ Admin area
+// Admin area
 builder.Services.AddAuthorization(x =>
 {
     x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
 });
 
 // Add services to the container.
-<<<<<<< HEAD
-=======
-//builder.Services.AddControllersWithViews();
->>>>>>> 3bc9267450d1a336a1bf54656b9ab3e0c6bc7beb
 builder.Services.AddControllersWithViews(x =>
 {
     x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
@@ -76,7 +72,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//ïîäêëþ÷àåì àóòåíòèôèêàöèþ è àâòîðèçàöèþ
+
 app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseAuthorization();
