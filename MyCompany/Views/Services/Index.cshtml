@@ -17,8 +17,12 @@
                     <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
                         <img src="~/images/@entity.TitleImagePath" alt="" class="left" />
                     </a>
+                    <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
                     <h4>@entity.Title</h4>
+                    </a>
+                    <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
                     <p>@entity.Subtitle</p>
+                    </a>
                 </li>
             }
         </ul>

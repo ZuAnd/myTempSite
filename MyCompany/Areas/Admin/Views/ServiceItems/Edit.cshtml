@@ -16,40 +16,40 @@
 
             <div asp-validation-summary="All"></div>
             <div class="div-box">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" />
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title"></span>
             </div>
             <div class="div-box">
-                <label asp-for="Subtitle"></label>
-                <input asp-for="Subtitle" />
+                <label asp-for="Subtitle" class="form-label"></label>
+                <input asp-for="Subtitle"  class="form-control"/>
                 <span asp-validation-for="Subtitle"></span>
             </div>
             <div class="div-box">
-                <label asp-for="Text"></label>
-                <textarea asp-for="Text"></textarea>
+                <label asp-for="Text" class="form-label"></label>
+                <textarea asp-for="Text" id = "Text"></textarea>
                 <span asp-validation-for="Text"></span>
             </div>
             <div class="div-box">
-                <label asp-for="TitleImagePath"></label>
-                <input type="file" name="titleImageFile" id="titleImageFile" />
+                <label asp-for="TitleImagePath" class="form-label"></label>
+                <input type="file" name="titleImageFile" id="titleImageFile" class="form-control" />
                 <div>
-                    <img class="img-block" src="~/images/@Model.TitleImagePath" />
+                    <img class="img-block img-fluid" src="~/images/@Model.TitleImagePath" />
                 </div>
             </div>
             <div class="div-box">
-                <label asp-for="MetaTitle"></label>
-                <input asp-for="MetaTitle" />
+                <label asp-for="MetaTitle" class="form-label"></label>
+                <input asp-for="MetaTitle"  class="form-control"/>
                 <span asp-validation-for="MetaTitle"></span>
             </div>
             <div class="div-box">
-                <label asp-for="MetaDescription"></label>
-                <input asp-for="MetaDescription" />
+                <label asp-for="MetaDescription" class="form-label"></label>
+                <input asp-for="MetaDescription" class="form-control" />
                 <span asp-validation-for="MetaDescription"></span>
             </div>
             <div class="div-box">
-                <label asp-for="MetaKeywords"></label>
-                <input asp-for="MetaKeywords" />
+                <label asp-for="MetaKeywords" class="form-label"></label>
+                <input asp-for="MetaKeywords" class="form-control" />
                 <span asp-validation-for="MetaKeywords"></span>
             </div>
             <input type="submit" value="Сохранить" />
@@ -59,9 +59,22 @@
 
 
 
-<script>
+@*<script>
     window.onload = function() {
         var newCKEdit = CKEDITOR.replace('@Html.IdFor(x=>x.Text)');
         newCKEdit.updateElement();
     }
+</script>*@
+
+            <script>
+	ClassicEditor
+		.create( document.querySelector( '#@Html.IdFor(x=>x.Text)' ), {
+			 //toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+		} )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
 </script>
